@@ -1,5 +1,5 @@
 <?php
-include 'src/database.php';
+include '../src/database.php';
 $db = new Database();
 $user = $db->editUser($_GET['id']);
 
