@@ -13,7 +13,7 @@ $db = new Database();
 </head>
 <body>
 
-<div class="p-4" style="width: 900px; display: block; margin: 10px auto 0; border: 1px solid #dddddd;">
+<div class="p-4" style="width: 1200px; display: block; margin: 10px auto 0; border: 1px solid #dddddd;">
     <div>
         <h4>Ini Data User Form</h4>
     </div>
@@ -33,7 +33,7 @@ $db = new Database();
         <tbody>
         <?php
             $no = 1;
-            foreach ($db->data_user() as $data){
+            foreach ($db->dataUser() as $data){
                 ?>
         <tr>
             <td><?php echo $no++; ?></td>
@@ -42,9 +42,12 @@ $db = new Database();
             <td><?php echo $data['alamat']; ?></td>
             <td><?php echo $data['nomor_telp']; ?></td>
             <td><?php echo "-"; ?></td>
-            <td>
+            <td class="d-flex gap-1">
                 <a href="edit.php?id=<?php echo $data['id']?>&aksi=edit" class="btn btn-warning"><i class=""></i>Edit</a>
-                <a href="" class="btn btn-danger"><i class=""></i>Hapus</a>
+                <form action="proses.php?aksi=delete&id=<?php echo $data['id']?>" method="post">
+                    <input type="hidden" name="id" value="<?php echo $data['id']?>">
+                    <button class="btn btn-danger">Hapus</button>
+                </form>
             </td>
         </tr>
 

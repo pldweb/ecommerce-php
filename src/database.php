@@ -14,24 +14,34 @@ class database
         mysqli_select_db($this->connect, $this->database);
     }
 
-    function data_user()
+    function dataUser()
     {
         $data = mysqli_query($this->connect, "SELECT * FROM user");
         $rows = mysqli_fetch_all($data, MYSQLI_ASSOC);
         return $rows;
     }
 
-    function edit_user($id)
+    function tambahUser($nama, $email, $password, $alamat, $nomor_telp)
+    {
+        $query = "INSERT INTO user (nama, email, password, alamat, nomor_telp) VALUES ('$nama', '$email', '$password', '$alamat', '$nomor_telp')";
+        mysqli_query($this->connect, $query);
+    }
+
+    function editUser($id)
     {
         $data = mysqli_query($this->connect, "SELECT * FROM user WHERE id = '$id'");
         $rows = mysqli_fetch_assoc($data);
         return $rows;
     }
 
-    function tambah_user($nama, $email, $password, $alamat, $nomor_telp)
+    function updateUser($id, $nama, $email, $password, $alamat, $nomor_telp)
     {
-        $query = "INSERT INTO user (nama, email, password, alamat, nomor_telp) VALUES ('$nama', '$email', '$password', '$alamat', '$nomor_telp')";
-        mysqli_query($this->connect, $query);
+        mysqli_query($this->connect, "UPDATE user SET nama='$nama', email='$email', password='$password' , alamat='$alamat', nomor_telp='$nomor_telp' WHERE id='$id'");
+    }
+
+    function deleteUser($id)
+    {
+        mysqli_query($this->connect, "DELETE FROM user WHERE id = '$id'");
     }
 }
 

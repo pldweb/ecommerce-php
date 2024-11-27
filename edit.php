@@ -1,10 +1,9 @@
-<<?php
+<?php
 include 'src/database.php';
 $db = new Database();
-$user = $db->edit_user($_GET['id']);
+$user = $db->editUser($_GET['id']);
 
 ?>
-<!doctype html>
 <html lang="en">
 <head>
     <meta charset="utf-8">
@@ -19,6 +18,7 @@ $user = $db->edit_user($_GET['id']);
         <h4>Ini Edit Data User Form</h4>
     </div>
     <form action="proses.php?aksi=update&id=<?php echo $user['id']; ?>" method="post">
+        <input type="hidden" name="id" value="<?php echo $user['id']; ?>">
         <div class="mb-3">
             <label for="nama" class="form-label nama">Nama</label>
             <input type="text" class="form-control" id="nama" name="nama" value="<?php echo $user['nama']; ?>">
@@ -33,7 +33,7 @@ $user = $db->edit_user($_GET['id']);
         </div>
         <div class="mb-3">
             <label for="alamat" class="form-label alamat">Alamat</label>
-            <input class="form-control" id="alamat" name="alamat" value="<?php echo $user['alamat']; ?>"></input>
+            <textarea class="form-control" id="alamat" name="alamat"><?php echo $user['alamat']; ?></textarea>
         </div>
         <label for="nomor_telp" class="form-label nomor_telp">Nomor Telp</label>
         <div class="input-group mb-3">
@@ -41,6 +41,7 @@ $user = $db->edit_user($_GET['id']);
             <input type="number" class="form-control" id="nomor_telp" name="nomor_telp" value="<?php echo $user['nomor_telp']; ?>">
         </div>
         <input type="submit" class="btn btn-primary" value="simpan">
+        <a href="index.php" class="btn btn-danger">Kembali</a>
     </form>
 </div>
 
