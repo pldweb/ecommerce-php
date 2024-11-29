@@ -53,11 +53,7 @@ $db = new Database();
                 </form>
             </td>
         </tr>
-
-        <?php
-        }
-        ?>
-
+        <?php  }  ?>
         </tbody>
     </table>
 </div>
