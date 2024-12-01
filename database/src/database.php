@@ -1,5 +1,6 @@
 <?php
 
+namespace src;
 class database
 {
     public $host = "localhost";
@@ -47,7 +48,7 @@ class database
         mysqli_query($this->connect, $query);
     }
 
-    function dataUser()
+    public function dataUser()
     {
         $data = mysqli_query($this->connect, "SELECT * FROM user");
         $rows = mysqli_fetch_all($data, MYSQLI_ASSOC);

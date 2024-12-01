@@ -1,5 +1,7 @@
 <?php
 
+use src\database;
+
 include '../src/database.php';
 
 $database = new Database();

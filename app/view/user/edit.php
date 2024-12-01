@@ -1,9 +1,3 @@
-<?php
-include '../src/database.php';
-$db = new Database();
-$user = $db->editUser($_GET['id']);
-
-?>
 <html lang="en">
 <head>
     <meta charset="utf-8">

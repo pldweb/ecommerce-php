@@ -1,8 +1,4 @@
-<?php
-include '../src/database.php';
-$db = new Database();
-$data = $db->dataRole();
-?>
+
 
 
 <html lang="en">

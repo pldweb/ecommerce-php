@@ -1,9 +1,4 @@
-<?php
-include '../src/database.php';
-$db = new Database();
-$role = $db->editRole($_GET['id']);
 
-?>
 <html lang="en">
 <head>
     <meta charset="utf-8">
