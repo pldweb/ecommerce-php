@@ -1,0 +1,15 @@
+INSERT INTO mitra (id_mitra, nama, alamat, contact, jenis, jumlah_aset, tanggal_pendirian)
+VALUES (1, 'Mitra A', 'Jl. Merdeka No.1, Jakarta', '08123456789', 'Perusahaan', 5000000000, '2010-05-12'),
+       (2, 'Mitra B', 'Jl. Sudirman No.2, Bandung', '08123456780', 'Toko', 1000000000, '2015-03-21'),
+       (3, 'Mitra C', 'Jl. Raya No.3, Surabaya', '08123456781', 'Perusahaan', 3000000000, '2012-06-15'),
+       (4, 'Mitra D', 'Jl. Kebon Jeruk No.4, Medan', '08123456782', 'Usaha Kecil', 150000000, '2017-02-10'),
+       (5, 'Mitra E', 'Jl. Pahlawan No.5, Yogyakarta', '08123456783', 'Perusahaan', 7500000000, '2008-09-09'),
+       (6, 'Mitra F', 'Jl. Pelajar No.6, Makassar', '08123456784', 'Perusahaan', 2000000000, '2011-11-23'),
+       (7, 'Mitra G', 'Jl. Senen No.7, Palembang', '08123456785', 'Toko', 500000000, '2019-04-30'),
+       (8, 'Mitra H', 'Jl. Cimanuk No.8, Bali', '08123456786', 'Toko', 250000000, '2020-07-14'),
+       (9, 'Mitra I', 'Jl. Teratai No.9, Bogor', '08123456787', 'Usaha Kecil', 100000000, '2016-01-05'),
+       (10, 'Mitra J', 'Jl. Kertajaya No.10, Semarang', '08123456788', 'Perusahaan', 4000000000, '2013-08-17'),
+       (11, 'Mitra K', 'Jl. Sukajadi No.11, Solo', '08123456789', 'Perusahaan', 5500000000, '2014-10-19'),
+       (12, 'Mitra L', 'Jl. Padang No.12, Malang', '08123456780', 'Toko', 300000000, '2018-02-25'),
+       (13, 'Mitra M', 'Jl. Taman Siswa No.13, Tangerang', '08123456781', 'Perusahaan', 6000000000, '2016-05-30'),
+       (14, 'Mitra N', 'Jl. Merpati No.14, Depok', '08123456782', 'Usaha Kecil', 800000000, '2021-09-12'),                                                                                                      (15, 'Mitra O', 'Jl. Asri No.15, Malang', '08123456783', 'Perusahaan', 10000000000, '2005-01-01');
