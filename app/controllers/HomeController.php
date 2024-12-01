@@ -4,7 +4,7 @@
 class Home extends Controller {
     public function index()
     {
-        $data['nama'] =$this->model('User_model')->getUser();
+        $data['nama'] = $this->model('User')->getUser();
 
         $this->render('komponen/header');
         $this->render('komponen/script-top');

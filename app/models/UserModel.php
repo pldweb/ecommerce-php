@@ -1,6 +1,6 @@
 <?php
 
-class User_model
+class UserModel
 {
 
     private $table = 'user';

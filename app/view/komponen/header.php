@@ -17,8 +17,9 @@
                     Produk
                 </a>
                 <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-                    <li><a class="dropdown-item" href="#">Kategori Produk</a></li>
-                    <li><a class="dropdown-item" href="#">Brand Produk</a></li>
+                    <li><a class="dropdown-item" href="<?= BASE_URL ?>/produk">Produk</a></li>
+                    <li><a class="dropdown-item" href="<?= BASE_URL ?>/kategori-produk"">Kategori Produk</a></li>
+                    <li><a class="dropdown-item" href="<?= BASE_URL ?>/brand-produk"">Brand Produk</a></li>
                 </ul>
             </li>
             <li class="nav-item"><a href="#" class="nav-link">Transaksi</a></li>
@@ -30,6 +31,6 @@
 
 <div class="row">
     <div class="col-lg-12">
-        <?php Flasher::flash(); ?>
+        <?= Flasher::flash(); ?>
     </div>
 </div>

@@ -1,7 +1,7 @@
     <div>
         <h4><?= $data['judul'] ?></h4>
     </div>
-    <a href="<?= BASE_URL ?>/user/tambah" class="btn btn-primary mb-2">Tambah Data User</a>
+    <a href="<?= BASE_URL ?>/user/tambah" class="btn btn-primary mb-2">Tambah Data <?= $data['halaman'] ?></a>
     <table class="table">
         <thead>
         <tr>
@@ -15,16 +15,14 @@
         </tr>
         </thead>
         <tbody>
-        <?php
-            $no = 1;
-            foreach ($data['user'] as $data){?>
+        <?php foreach ($data['user'] as $num => $data){?>
         <tr>
-            <td><?php echo $no++; ?></td>
-            <td><?php echo $data['nama']; ?></td>
-            <td><?php echo $data['email']; ?></td>
-            <td><?php echo $data['alamat']; ?></td>
-            <td><?php echo $data['nomor_telp']; ?></td>
-            <td><?php echo $data['role_nama']; ?></td>
+            <td><?= $num+1; ?></td>
+            <td><?= $data['nama']; ?></td>
+            <td><?= $data['email']; ?></td>
+            <td><?= $data['alamat']; ?></td>
+            <td><?= $data['nomor_telp']; ?></td>
+            <td><?= $data['role_nama']; ?></td>
             <td class="">
                 <a href="<?= BASE_URL ?>/user/detail/<?= $data['id'] ?>" class="btn btn-warning">Edit</a>
                 <a onclick="return confirm('Apakah anda yakin?');" href="<?= BASE_URL ?>/user/delete/<?= $data['id'] ?>" class="btn btn-danger">Hapus</a>

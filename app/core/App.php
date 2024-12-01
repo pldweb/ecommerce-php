@@ -1,17 +1,23 @@
 <?php
 
 
-class App {
+class App
+{
 
     protected $controller = 'Home';
     protected $method = 'index';
     protected $params = [];
 
-    function __construct() {
+    function __construct()
+    {
         $url = $this->parseURL();
 
+        if (ctype_lower($url[0])) {
+            $url[0] = ucfirst($url[0]);
+        }
+
         // Controller
-        if (file_exists(__DIR__ . '/../controllers/' . ucfirst($url[0]) . 'Controller.php')) {
+        if (file_exists(__DIR__ . '/../controllers/' . $url[0] . 'Controller.php')) {
             $this->controller = $url[0];
             unset($url[0]);
         }
@@ -31,7 +37,7 @@ class App {
 
         // Parameter
         if (!empty($url)) {
-           $this->params = array_values($url);
+            $this->params = array_values($url);
         }
 
         call_user_func_array([$this->controller, $this->method], $this->params);
@@ -43,8 +49,17 @@ class App {
         if (isset($_GET['url'])) {
             $url = rtrim($_GET['url'], '/');
             $url = filter_var($url, FILTER_SANITIZE_URL);
+            $url = substr($url, 1);
             $url = explode('/', $url);
-            array_splice($url, 0, 1);
+
+            if (str_contains($url[0], '-')) {
+                $url[0] = explode('-', $url[0]);
+                foreach ($url[0] as $key => $val) {
+                    $url[0][$key] = ucfirst($val);
+                }
+                $url[0] = implode($url[0]);
+            }
+
             return $url;
         } else {
             return [$this->controller, $this->method];

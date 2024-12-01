@@ -1,42 +1,42 @@
 <?php
 
 
-class User extends Controller
+class BrandProduk extends Controller
 {
     public function index()
     {
-        $data['judul'] = 'Data User';
+        $data['judul'] = 'Data Brand Produk';
         $data['halaman'] = substr($data['judul'], 5);
-        $data['user'] = $this->model('UserModel')->getUser();
+        $data['brand-produk'] = $this->model('BrandProdukModel')->getBrandProduk();
 
         $this->render('komponen/header');
         $this->render('komponen/script-top');
-        $this->render('user/index', $data);
+        $this->render('brand-produk/index', $data);
         $this->render('komponen/script-bottom');
     }
 
     public function tambah()
     {
-        $data['judul'] = 'Tambah Data User';
-        $data['role'] = $this->model('UserModel')->getRole();
+        $data['judul'] = 'Tambah Data BrandProduk';
+        $data['brand-produk'] = $this->model('BrandProdukModel')->getBrandProduk();
 
         $this->render('komponen/header');
         $this->render('komponen/script-top');
-        $this->render('user/tambah', $data);
+        $this->render('brand-produk/tambah', $data);
         $this->render('komponen/script-bottom');
     }
 
     public function delete($id)
     {
         if ($id){
-            if ($this->model('UserModel')->deleteUser($id) == true) {
+            if ($this->model('BrandProdukModel')->deleteBrandProduk($id) == true) {
                 Flasher::setFlash('Berhasil', 'Data berhasil dihapus', 'success');
-                header('location:' . BASE_URL . '/user');
+                header('location:' . BASE_URL . '/brand-produk');
                 exit;
             }
         } else {
             Flasher::setFlash('Kesalahan tidak ada ID', 'Data gagal dihapus', 'danger');
-            header('location:' . BASE_URL . '/user');
+            header('location:' . BASE_URL . '/brand-produk');
             exit;
         }
     }
@@ -44,23 +44,23 @@ class User extends Controller
     public function simpan($id = null)
     {
         if ($id) {
-            if ($this->model('UserModel')->updateDataUser($_POST, $id) == true) {
+            if ($this->model('BrandProdukModel')->updateDataBrandProduk($_POST, $id) == true) {
                 Flasher::setFlash('Berhasil', 'Data berhasil diedit', 'success');
-                header('location:' . BASE_URL . '/user');
+                header('location:' . BASE_URL . '/brand-produk');
                 exit;
             } else {
                 Flasher::setFlash('Kesalahan', 'Data gagal disimpan', 'danger');
-                header('location:' . BASE_URL . '/user');
+                header('location:' . BASE_URL . '/brand-produk');
                 exit;
             }
         } else {
-            if ($this->model('UserModel')->simpanDataUser($_POST) > 0) {
+            if ($this->model('BrandProdukModel')->simpanDataBrandProduk($_POST) > 0) {
                 Flasher::setFlash('Berhasil', 'Data berhasil ditambahkan', 'success');
-                header('location:' . BASE_URL . '/user');
+                header('location:' . BASE_URL . '/brand-produk');
                 exit;
             } else {
                 Flasher::setFlash('Kesalahan', 'Data gagal disimpan', 'danger');
-                header('location:' . BASE_URL . '/user');
+                header('location:' . BASE_URL . '/brand-produk');
                 exit;
             }
         }
@@ -68,15 +68,14 @@ class User extends Controller
 
     public function detail($id)
     {
-        $data['judul'] = 'Edit Data User';
+        $data['judul'] = 'Edit Data BrandProduk';
         $data['halaman'] = substr($data['judul'], 10);
-
-        $data['detail'] = $this->model('UserModel')->getUserById($id);
-        $data['role'] = $this->model('UserModel')->getRole();
+        $data['detail'] = $this->model('BrandProdukModel')->getBrandProdukById($id);
+        $data['brand-produk'] = $this->model('BrandProdukModel')->getBrandProduk();
 
         $this->render('komponen/header');
         $this->render('komponen/script-top');
-        $this->render('user/edit', $data);
+        $this->render('brand-produk/edit', $data);
         $this->render('komponen/script-bottom');
     }
 

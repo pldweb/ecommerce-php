@@ -35,6 +35,6 @@
             </select>
         </div>
         <button type="submit" class="btn btn-primary" value="simpan">Submit</button>
-        <a href="index.php" class="btn btn-danger">Kembali</a>
+        <a href="<?= BASE_URL ?>/<?= strtolower($data['halaman']) ?>" class="btn btn-danger">Kembali</a>
     </form>
 </div>
