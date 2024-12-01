@@ -1,4 +1,3 @@
-<div class="p-4" style="width: 1200px; display: block; margin: 10px auto 0; border: 1px solid #dddddd;">
     <div>
         <h4><?= $data['judul'] ?></h4>
     </div>
@@ -37,4 +36,4 @@
         <?php  }  ?>
         </tbody>
     </table>
-</div>
+

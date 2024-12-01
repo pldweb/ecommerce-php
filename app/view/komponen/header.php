@@ -25,3 +25,11 @@
         </ul>
     </header>
 </div>
+
+<div class="p-4" style="width: 1200px; display: block; margin: 10px auto 0; border: 1px solid #dddddd;">
+
+<div class="row">
+    <div class="col-lg-12">
+        <?php Flasher::flash(); ?>
+    </div>
+</div>

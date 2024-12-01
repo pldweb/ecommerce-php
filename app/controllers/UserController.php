@@ -29,21 +29,24 @@ class User extends Controller
     {
         if ($id) {
             if ($this->model('User_model')->updateDataUser($_POST, $id) == true) {
-                header('location:' . BASE_URL . '/user/index');
+                Flasher::setFlash('Berhasil', 'Data berhasil diedit', 'success');
+                header('location:' . BASE_URL . '/user');
                 exit;
             } else {
+                Flasher::setFlash('Gagal', 'Data gagal disimpan', 'danger');
                 echo "Data Tidak Berhasil disimpan";
             }
         } else {
             if ($this->model('User_model')->simpanDataUser($_POST) > 0) {
-                header('location:' . BASE_URL . '/user/index');
+                Flasher::setFlash('Berhasil', 'Data berhasil ditambahkan', 'success');
+                header('location:' . BASE_URL . '/user');
                 exit;
             } else {
+                Flasher::setFlash('Gagal', 'Data gagal disimpan', 'danger');
                 echo "Data Tidak Berhasil disimpan";
             }
         }
     }
-
 
     public function detail($id)
     {
