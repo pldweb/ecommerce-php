@@ -85,13 +85,13 @@ class ProdukModel
         return $this->db->single();
     }
 
-    public function getBrand()
+    public function getBrandProduk()
     {
         $this->db->query("SELECT * FROM brand_produk");
         return $this->db->resultSet();
     }
 
-    public function getKategori()
+    public function getKategoriProduk()
     {
         $this->db->query("SELECT * FROM kategori_produk");
         return $this->db->resultSet();

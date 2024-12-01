@@ -9,8 +9,8 @@ class Role extends Controller
         $data['halaman'] = substr($data['judul'], 5);
         $data['role'] = $this->model('RoleModel')->getRole();
 
-        $this->render('komponen/header');
         $this->render('komponen/script-top');
+        $this->render('komponen/header');
         $this->render('role/index', $data);
         $this->render('komponen/script-bottom');
     }
@@ -20,8 +20,8 @@ class Role extends Controller
         $data['judul'] = 'Tambah Data Role';
         $data['role'] = $this->model('RoleModel')->getRole();
 
-        $this->render('komponen/header');
         $this->render('komponen/script-top');
+        $this->render('komponen/header');
         $this->render('role/tambah', $data);
         $this->render('komponen/script-bottom');
     }
@@ -73,8 +73,8 @@ class Role extends Controller
         $data['detail'] = $this->model('RoleModel')->getRoleById($id);
         $data['role'] = $this->model('RoleModel')->getRole();
 
-        $this->render('komponen/header');
         $this->render('komponen/script-top');
+        $this->render('komponen/header');
         $this->render('role/edit', $data);
         $this->render('komponen/script-bottom');
     }

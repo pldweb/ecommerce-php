@@ -13,10 +13,10 @@
         <tbody>
         <?php foreach ($data['brand-produk'] as $num => $data){ ?>
         <tr>
-            <td><?= $no++; ?></td>
+            <td><?= $num+1; ?></td>
             <td><?= $data['nama']; ?></td>
             <td class="">
-                <a href="<?= BASE_URL ?>/produk/detail/<?= $data['id'] ?>" class="btn btn-warning">Edit</a>
+                <a href="<?= BASE_URL ?>/brand-produk/detail/<?= $data['id'] ?>" class="btn btn-warning">Edit</a>
                 <a onclick="return confirm('Apakah anda yakin?');" href="<?= BASE_URL ?>/produk/delete/<?= $data['id'] ?>" class="btn btn-danger">Hapus</a>
             </td>
         </tr>

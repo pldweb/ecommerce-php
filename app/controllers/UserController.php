@@ -9,8 +9,8 @@ class User extends Controller
         $data['halaman'] = substr($data['judul'], 5);
         $data['user'] = $this->model('UserModel')->getUser();
 
-        $this->render('komponen/header');
         $this->render('komponen/script-top');
+        $this->render('komponen/header');
         $this->render('user/index', $data);
         $this->render('komponen/script-bottom');
     }
@@ -20,15 +20,15 @@ class User extends Controller
         $data['judul'] = 'Tambah Data User';
         $data['role'] = $this->model('UserModel')->getRole();
 
-        $this->render('komponen/header');
         $this->render('komponen/script-top');
+        $this->render('komponen/header');
         $this->render('user/tambah', $data);
         $this->render('komponen/script-bottom');
     }
 
     public function delete($id)
     {
-        if ($id){
+        if ($id) {
             if ($this->model('UserModel')->deleteUser($id) == true) {
                 Flasher::setFlash('Berhasil', 'Data berhasil dihapus', 'success');
                 header('location:' . BASE_URL . '/user');
@@ -66,6 +66,7 @@ class User extends Controller
         }
     }
 
+
     public function detail($id)
     {
         $data['judul'] = 'Edit Data User';
@@ -74,8 +75,8 @@ class User extends Controller
         $data['detail'] = $this->model('UserModel')->getUserById($id);
         $data['role'] = $this->model('UserModel')->getRole();
 
-        $this->render('komponen/header');
         $this->render('komponen/script-top');
+        $this->render('komponen/header');
         $this->render('user/edit', $data);
         $this->render('komponen/script-bottom');
     }

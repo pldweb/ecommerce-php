@@ -9,8 +9,8 @@ class BrandProduk extends Controller
         $data['halaman'] = substr($data['judul'], 5);
         $data['brand-produk'] = $this->model('BrandProdukModel')->getBrandProduk();
 
-        $this->render('komponen/header');
         $this->render('komponen/script-top');
+        $this->render('komponen/header');
         $this->render('brand-produk/index', $data);
         $this->render('komponen/script-bottom');
     }
@@ -20,8 +20,8 @@ class BrandProduk extends Controller
         $data['judul'] = 'Tambah Data BrandProduk';
         $data['brand-produk'] = $this->model('BrandProdukModel')->getBrandProduk();
 
-        $this->render('komponen/header');
         $this->render('komponen/script-top');
+        $this->render('komponen/header');
         $this->render('brand-produk/tambah', $data);
         $this->render('komponen/script-bottom');
     }
@@ -73,8 +73,8 @@ class BrandProduk extends Controller
         $data['detail'] = $this->model('BrandProdukModel')->getBrandProdukById($id);
         $data['brand-produk'] = $this->model('BrandProdukModel')->getBrandProduk();
 
-        $this->render('komponen/header');
         $this->render('komponen/script-top');
+        $this->render('komponen/header');
         $this->render('brand-produk/edit', $data);
         $this->render('komponen/script-bottom');
     }

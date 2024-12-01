@@ -2,34 +2,25 @@
     <div>
         <h4><?= $data['judul'] ?></h4>
     </div>
-    <form action="<?= BASE_URL ?>/user/simpan" method="POST">
+    <form action="<?= BASE_URL ?>/produk/simpan" method="POST">
         <div class="mb-3">
             <label for="nama" class="form-label nama">Nama</label>
             <input type="text" class="form-control" id="nama" name="nama" placeholder="nama">
         </div>
-        <div class=" mb-3">
-            <label for="email" class="form-label email">Email</label>
-            <input type="email" class="form-control" id="email" name="email" placeholder="email">
+        <div class="mb-3">
+            <label for="brand_id" class="form-label">Kategori Brand</label>
+            <select name="brand_id" id="brand_id" class="form-select" aria-label="select">
+                <?php foreach ($data['brand'] as $item) { ?>
+                    <option value="<?php echo $item['id']?>"><?php echo $item['nama']?></option>
+                <?php } ?>
+            </select>
         </div>
         <div class="mb-3">
-            <label for="password" class="form-label password">Password</label>
-            <input type="password" class="form-control" id="password" name="password" placeholder="password">
-        </div>
-        <div class="mb-3">
-            <label for="alamat" class="form-label alamat">Alamat</label>
-            <textarea class="form-control" id="alamat" name="alamat" placeholder="alamat"></textarea>
-        </div>
-        <label for="nomor_telp" class="form-label nomor_telp">Nomor Telp</label>
-        <div class="input-group mb-3">
-            <span class="input-group-text" id="basic-addon1">+62</span>
-            <input type="number" class="form-control" id="nomor_telp" name="nomor_telp" placeholder="ex:8757834">
-        </div>
-        <div class="mb-3">
-            <label for="role_id" class="form-label password">Role</label>
-            <select name="role_id" id="role_id" class="form-select" aria-label="select">
-                <?= foreach ($data['role'] as $item) { ?>
-                    <option value="<?= echo $item['id']?>"><?= echo $item['nama']?></option>
-                <?= } ?>
+            <label for="brand_id" class="form-label">Kategori Brand</label>
+            <select name="brand_id" id="brand_id" class="form-select" aria-label="select">
+                <?php foreach ($data['kategori'] as $item) { ?>
+                    <option value="<?php echo $item['id']?>"><?php echo $item['nama']?></option>
+                <?php } ?>
             </select>
         </div>
         <button type="submit" class="btn btn-primary">Simpan</button>

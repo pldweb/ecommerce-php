@@ -9,8 +9,8 @@ class Produk extends Controller
         $data['halaman'] = substr($data['judul'], 5);
         $data['produk'] = $this->model('ProdukModel')->getProduk();
 
-        $this->render('komponen/header');
         $this->render('komponen/script-top');
+        $this->render('komponen/header');
         $this->render('produk/index', $data);
         $this->render('komponen/script-bottom');
     }
@@ -18,10 +18,11 @@ class Produk extends Controller
     public function tambah()
     {
         $data['judul'] = 'Tambah Data Produk';
-        $data['role'] = $this->model('ProdukModel')->getRole();
+        $data['brand'] = $this->model('ProdukModel')->getBrandProduk();
+        $data['kategori'] = $this->model('ProdukModel')->getKategoriProduk();
 
-        $this->render('komponen/header');
         $this->render('komponen/script-top');
+        $this->render('komponen/header');
         $this->render('produk/tambah', $data);
         $this->render('komponen/script-bottom');
     }
@@ -72,10 +73,11 @@ class Produk extends Controller
         $data['halaman'] = substr($data['judul'], 10);
 
         $data['detail'] = $this->model('ProdukModel')->getProdukById($id);
-        $data['role'] = $this->model('ProdukModel')->getRole();
+        $data['brand'] = $this->model('ProdukModel')->getBrandProduk();
+        $data['kategori'] = $this->model('ProdukModel')->getKategoriProduk();
 
-        $this->render('komponen/header');
         $this->render('komponen/script-top');
+        $this->render('komponen/header');
         $this->render('produk/edit', $data);
         $this->render('komponen/script-bottom');
     }

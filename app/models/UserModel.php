@@ -48,7 +48,7 @@ class UserModel
             return true;
 
         } catch (\PDOException $e) {
-            return $e->getMessage();
+            return false;
         }
     }
 
@@ -70,7 +70,7 @@ class UserModel
             return $this->db->rowCount();
 
         } catch (\PDOException $e) {
-            return $e->getMessage();
+            return 0;
         }
     }
 

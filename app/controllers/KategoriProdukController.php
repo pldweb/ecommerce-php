@@ -9,8 +9,8 @@ class KategoriProduk extends Controller
         $data['halaman'] = substr($data['judul'], 5);
         $data['kategori-produk'] = $this->model('KategoriProdukModel')->getKategoriProduk();
 
-        $this->render('komponen/header');
         $this->render('komponen/script-top');
+        $this->render('komponen/header');
         $this->render('kategori-produk/index', $data);
         $this->render('komponen/script-bottom');
     }
@@ -20,8 +20,8 @@ class KategoriProduk extends Controller
         $data['judul'] = 'Tambah Data KategoriProduk';
         $data['kategori-produk'] = $this->model('KategoriProdukModel')->getKategoriProduk();
 
-        $this->render('komponen/header');
         $this->render('komponen/script-top');
+        $this->render('komponen/header');
         $this->render('kategori-produk/tambah', $data);
         $this->render('komponen/script-bottom');
     }
@@ -73,8 +73,8 @@ class KategoriProduk extends Controller
         $data['detail'] = $this->model('KategoriProdukModel')->getKategoriProdukById($id);
         $data['kategori-produk'] = $this->model('KategoriProdukModel')->getKategoriProduk();
 
-        $this->render('komponen/header');
         $this->render('komponen/script-top');
+        $this->render('komponen/header');
         $this->render('kategori-produk/edit', $data);
         $this->render('komponen/script-bottom');
     }

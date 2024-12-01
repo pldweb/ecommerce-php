@@ -1,3 +1,4 @@
+
 <div class="container">
     <header class="d-flex justify-content-center py-3">
         <ul class="nav nav-pills">
@@ -31,6 +32,6 @@
 
 <div class="row">
     <div class="col-lg-12">
-        <?= Flasher::flash(); ?>
+        <?php Flasher::flash(); ?>
     </div>
 </div>
