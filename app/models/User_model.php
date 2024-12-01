@@ -1,11 +1,53 @@
 <?php
 
-class User_model {
+class User_model
+{
+
+    private $table = 'user';
+    private $db;
+
+    public function __construct()
+    {
+        $this->db = new Database;
+    }
 
     public function getUser()
     {
-        $this->stmt = $this->dbh->prepare("SELECT * FROM user");
-        $this->stmt->execute();
-        return $this->stmt->fetchAll(PDO::FETCH_ASSOC);
+        $this->db->query("SELECT * FROM $this->table");
+        return $this->db->resultSet();
+    }
+
+    public function simpanDataUser($data)
+    {
+        $query = "INSERT INTO $this->table (nama, email, password, alamat, role_id, nomor_telp) 
+              VALUES (:nama, :email, :password, :alamat, :role_id, :nomor_telp)";
+
+        try {
+            $this->db->query($query);
+            $this->db->bind(':nama', $data['nama']);
+            $this->db->bind(':email', $data['email']);
+            $this->db->bind(':password', password_hash($data['password'], PASSWORD_DEFAULT));
+            $this->db->bind(':alamat', $data['alamat']);
+            $this->db->bind(':role_id', $data['role_id']);
+            $this->db->bind(':nomor_telp', $data['nomor_telp']);
+
+            $this->db->execute();
+            return $this->db->rowCount();
+
+        } catch (\PDOException $e) {
+            return $e->getMessage();
+        }
+    }
+
+    public function getUserById($id)
+    {
+        $this->db->query("SELECT * FROM $this->table WHERE id = '$id'");
+        return $this->db->single();
+    }
+
+    public function getRole()
+    {
+        $this->db->query("SELECT * FROM role");
+        return $this->db->resultSet();
     }
 }

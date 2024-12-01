@@ -2,7 +2,7 @@
     <div>
         <h4><?= $data['judul'] ?></h4>
     </div>
-    <a href="tambah.php" class="btn btn-primary mb-2">Tambah Data User</a>
+    <a href="<?= BASE_URL ?>/user/tambah" class="btn btn-primary mb-2">Tambah Data User</a>
     <table class="table">
         <thead>
         <tr>
@@ -27,9 +27,9 @@
             <td><?php echo $data['nomor_telp']; ?></td>
             <td><?php echo $data['role_id']; ?></td>
             <td class="">
-                <a href="edit.php?id=<?= $data['id']?>&aksi=edit" class="btn btn-warning">Edit</a>
-                <form action="proses.php?aksi=delete&id=<?php echo $data['id']?>" method="post">
-                    <input type="hidden" name="id" value="<?php echo $data['id']?>">
+                <a href="<?= BASE_URL ?>/user/detail/<?= $data['id'] ?>" class="btn btn-warning">Edit</a>
+                <form action="<?= BASE_URL ?>/user/delete/<?= $data['id']?>" method="post">
+                    <input type="hidden" name="id" value="<?= $data['id']?>">
                     <button class="btn btn-danger">Hapus</button>
                 </form>
             </td>

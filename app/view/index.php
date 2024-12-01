@@ -1,4 +1,1 @@
-
-
-
-<h1>Ini Home Index <?= $data['nama'] ?></h1>
+<h1>Ini Home Index </h1>

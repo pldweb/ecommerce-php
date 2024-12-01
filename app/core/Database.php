@@ -23,7 +23,7 @@ class Database
         ];
 
         try {
-            $this->dbh = new PDO($dsn, $this->host, $this->pass, $options);
+            $this->dbh = new PDO($dsn, $this->user, $this->pass, $options);
         } catch (PDOException $e) {
             echo 'Connection DB failed: ' . $e->getMessage();
         }
@@ -70,5 +70,10 @@ class Database
     {
         $this->execute();
         return $this->stmt->fetch(PDO::FETCH_ASSOC);
+    }
+
+    public function rowCount()
+    {
+        return $this->stmt->rowCount();
     }
 }
