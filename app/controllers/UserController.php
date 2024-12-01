@@ -34,7 +34,8 @@ class User extends Controller
                 exit;
             } else {
                 Flasher::setFlash('Gagal', 'Data gagal disimpan', 'danger');
-                echo "Data Tidak Berhasil disimpan";
+                header('location:' . BASE_URL . '/user');
+                exit;
             }
         } else {
             if ($this->model('User_model')->simpanDataUser($_POST) > 0) {
@@ -43,7 +44,8 @@ class User extends Controller
                 exit;
             } else {
                 Flasher::setFlash('Gagal', 'Data gagal disimpan', 'danger');
-                echo "Data Tidak Berhasil disimpan";
+                header('location:' . BASE_URL . '/user');
+                exit;
             }
         }
     }

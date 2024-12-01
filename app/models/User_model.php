@@ -45,16 +45,18 @@ class User_model
               VALUES (:nama, :email, :password, :alamat, :role_id, :nomor_telp)";
 
         try {
-            $this->db->query($query);
-            $this->db->bind(':nama', $data['nama']);
-            $this->db->bind(':email', $data['email']);
-            $this->db->bind(':password', password_hash($data['password'], PASSWORD_DEFAULT));
-            $this->db->bind(':alamat', $data['alamat']);
-            $this->db->bind(':role_id', $data['role_id']);
-            $this->db->bind(':nomor_telp', $data['nomor_telp']);
+//            $this->db->query($query);
+//            $this->db->bind(':nama', $data['nama']);
+//            $this->db->bind(':email', $data['email']);
+//            $this->db->bind(':password', password_hash($data['password'], PASSWORD_DEFAULT));
+//            $this->db->bind(':alamat', $data['alamat']);
+//            $this->db->bind(':role_id', $data['role_id']);
+//            $this->db->bind(':nomor_telp', $data['nomor_telp']);
+//
+//            $this->db->execute();
+//            return $this->db->rowCount();
 
-            $this->db->execute();
-            return $this->db->rowCount();
+            return 0;
 
         } catch (\PDOException $e) {
             return $e->getMessage();

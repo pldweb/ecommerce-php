@@ -13,7 +13,6 @@ class Flasher {
 
     public static function flash()
     {
-
         if (isset($_SESSION['flash_message'])) {
             echo '<div class="alert alert-' . $_SESSION['flash_message']['type']  . ' role="alert">
                   <h4 class="alert-heading">Well done!</h4>
