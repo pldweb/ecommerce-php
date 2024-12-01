@@ -17,6 +17,28 @@ class User_model
         return $this->db->resultSet();
     }
 
+    public function updateDataUser($data, $id)
+    {
+        $query = "UPDATE $this->table SET nama = :nama, email = :email, password = :password, alamat = :alamat, role_id = :role_id, nomor_telp = :nomor_telp WHERE id = :id";
+
+        try {
+            $this->db->query($query);
+            $this->db->bind(':id', $id);
+            $this->db->bind(':nama', $data['nama']);
+            $this->db->bind(':email', $data['email']);
+            $this->db->bind(':password', password_hash($data['password'], PASSWORD_DEFAULT));
+            $this->db->bind(':alamat', $data['alamat']);
+            $this->db->bind(':role_id', $data['role_id']);
+            $this->db->bind(':nomor_telp', $data['nomor_telp']);
+            $this->db->execute();
+
+            return true;
+
+        } catch (\PDOException $e) {
+            return $e->getMessage();
+        }
+    }
+
     public function simpanDataUser($data)
     {
         $query = "INSERT INTO $this->table (nama, email, password, alamat, role_id, nomor_telp) 

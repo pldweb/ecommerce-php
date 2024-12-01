@@ -3,7 +3,7 @@
     <div>
         <h4><?= $data['judul'] ?></h4>
     </div>
-    <form action="<?= BASE_URL ?>/user/update<?= $data['detail']['id'] ?>" method="post">
+    <form action="<?= BASE_URL ?>/user/simpan/<?= $data['detail']['id'] ?>" method="post">
         <input type="hidden" name="id" value="<?= $data['detail']['id']; ?>">
         <div class="mb-3">
             <label for="nama" class="form-label nama">Nama</label>
@@ -26,7 +26,15 @@
             <span class="input-group-text" id="basic-addon1">+62</span>
             <input type="number" class="form-control" id="nomor_telp" name="nomor_telp" value="<?= $data['detail']['nomor_telp']; ?>">
         </div>
-        <input type="submit" class="btn btn-primary" value="simpan">
+        <div class="mb-3">
+            <label for="role_id" class="form-label password">Role</label>
+            <select name="role_id" id="role_id" class="form-select" aria-label="select">
+                <?php foreach ($data['role'] as $item) { ?>
+                    <option value="<?php echo $item['id']?>"><?php echo $item['nama']?></option>
+                <?php } ?>
+            </select>
+        </div>
+        <button type="submit" class="btn btn-primary" value="simpan">Submit</button>
         <a href="index.php" class="btn btn-danger">Kembali</a>
     </form>
 </div>
