@@ -1,6 +1,23 @@
 <?php
 
 class User_model {
+
+    private $dbh; // Database Handler
+    private $stmt;
+
+    public function __construct()
+    {
+        // Data Source Name
+        $dsn = 'mysql:host=localhost;dbname=ecommerce;';
+
+        try {
+            $this->dbh = new PDO($dsn, 'root', '12345');
+        } catch (PDOException $e) {
+            echo 'Connection DB failed: ' . $e->getMessage();
+        }
+    }
+
+    // Contoh struktur data
     private $nama = [
         [
             "id" => 1,
@@ -22,6 +39,8 @@ class User_model {
 
     public function getUser()
     {
-        return $this->nama;
+        $this->stmt = $this->dbh->prepare("SELECT * FROM user");
+        $this->stmt->execute();
+        return $this->stmt->fetchAll(PDO::FETCH_ASSOC);
     }
 }
