@@ -24,13 +24,10 @@
             <td><?php echo $data['email']; ?></td>
             <td><?php echo $data['alamat']; ?></td>
             <td><?php echo $data['nomor_telp']; ?></td>
-            <td><?php echo $data['role_id']; ?></td>
+            <td><?php echo $data['role_nama']; ?></td>
             <td class="">
                 <a href="<?= BASE_URL ?>/user/detail/<?= $data['id'] ?>" class="btn btn-warning">Edit</a>
-                <form action="<?= BASE_URL ?>/user/delete/<?= $data['id']?>" method="post">
-                    <input type="hidden" name="id" value="<?= $data['id']?>">
-                    <button class="btn btn-danger">Hapus</button>
-                </form>
+                <a onclick="return confirm('Apakah anda yakin?');" href="<?= BASE_URL ?>/user/delete/<?= $data['id'] ?>" class="btn btn-danger">Hapus</a>
             </td>
         </tr>
         <?php  }  ?>

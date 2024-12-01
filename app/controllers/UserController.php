@@ -25,6 +25,21 @@ class User extends Controller
         $this->render('komponen/script-bottom');
     }
 
+    public function delete($id)
+    {
+        if ($id){
+            if ($this->model('User_model')->deleteUser($id) == true) {
+                Flasher::setFlash('Berhasil', 'Data berhasil dihapus', 'success');
+                header('location:' . BASE_URL . '/user');
+                exit;
+            }
+        } else {
+            Flasher::setFlash('Kesalahan tidak ada ID', 'Data gagal dihapus', 'danger');
+            header('location:' . BASE_URL . '/user');
+            exit;
+        }
+    }
+
     public function simpan($id = null)
     {
         if ($id) {
@@ -33,7 +48,7 @@ class User extends Controller
                 header('location:' . BASE_URL . '/user');
                 exit;
             } else {
-                Flasher::setFlash('Gagal', 'Data gagal disimpan', 'danger');
+                Flasher::setFlash('Kesalahan', 'Data gagal disimpan', 'danger');
                 header('location:' . BASE_URL . '/user');
                 exit;
             }
@@ -43,7 +58,7 @@ class User extends Controller
                 header('location:' . BASE_URL . '/user');
                 exit;
             } else {
-                Flasher::setFlash('Gagal', 'Data gagal disimpan', 'danger');
+                Flasher::setFlash('Kesalahan', 'Data gagal disimpan', 'danger');
                 header('location:' . BASE_URL . '/user');
                 exit;
             }
