@@ -59,6 +59,10 @@ class ProdukModel
         $query = "INSERT INTO $this->table (nama, brand_id, kategori_id, harga, diskon, stok, deskripsi, foto) 
               VALUES (:nama, :brand_id, :kategori_id, :harga, :diskon, :stok, :deskripsi, :foto)";
 
+        if ($data['foto']) {
+            file_get_contents($data['foto']);
+        }
+
         try {
             $this->db->query($query);
             $this->db->bind(':nama', $data['nama']);

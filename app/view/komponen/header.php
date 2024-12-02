@@ -23,7 +23,7 @@
                     <li><a class="dropdown-item" href="<?= BASE_URL ?>/brand-produk"">Brand Produk</a></li>
                 </ul>
             </li>
-            <li class="nav-item"><a href="#" class="nav-link">Transaksi</a></li>
+            <li class="nav-item"><a href="<?= BASE_URL ?>/transaksi" class="nav-link">Transaksi</a></li>
         </ul>
     </header>
 </div>
