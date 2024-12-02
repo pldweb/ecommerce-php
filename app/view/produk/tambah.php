@@ -2,7 +2,7 @@
     <div>
         <h4><?= $data['judul'] ?></h4>
     </div>
-    <form action="<?= BASE_URL ?>/produk/simpan" method="POST">
+    <form action="<?= BASE_URL ?>/produk/simpan" method="POST" enctype="multipart/form-data">
         <div class="mb-3">
             <label for="nama" class="form-label nama">Nama</label>
             <input type="text" class="form-control" id="nama" name="nama" placeholder="nama">
@@ -23,6 +23,22 @@
                 <?php } ?>
             </select>
         </div>
-        <button type="submit" class="btn btn-primary">Simpan</button>
+        <div class="mb-3">
+            <label for="harga" class="form-label harga">Harga Produk</label>
+            <input type="number" class="form-control" id="harga" name="harga" placeholder="80.000.000">
+        </div>
+        <div class="mb-3">
+            <label for="diskon" class="form-label diskon">Diskon Produk</label>
+            <input type="number" class="form-control" id="diskon" name="diskon" placeholder="50%">
+        </div>
+        <label for="deskripsi" class="form-label deskripsi">Deskripsi</label>
+        <div class="mb-3">
+            <textarea name="deskripsi" id="deskripsi" rows="5" class="form-control"></textarea>
+        </div>
+        <div class="mb-3">
+            <label for="foto" class="form-label foto">Foto Produk</label>
+            <input type="file" class="form-control" id="foto" name="foto">
+        </div>
+        <button type="submit" onclick="return confirm('Apakah Kamu yakin?');" class="btn btn-primary">Simpan</button>
     </form>
 </div>

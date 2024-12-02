@@ -1,6 +1,6 @@
 <?php
 
-if (!session_id()) {
+if (isset($_SESSION['nama'])) {
     session_start();
 }
 require_once "./app/init.php";
