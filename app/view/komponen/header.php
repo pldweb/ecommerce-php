@@ -1,4 +1,3 @@
-
 <div class="container">
     <header class="d-flex justify-content-center py-3">
         <ul class="nav nav-pills">
@@ -8,7 +7,7 @@
                     User
                 </a>
                 <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-                    <li><a class="dropdown-item" href="#">Profile</a></li>
+                    <li><a class="dropdown-item" href="#">Profile </a></li>
                     <li><a class="dropdown-item" href="<?= BASE_URL ?>/user">Data User</a></li>
                     <li><a class="dropdown-item" href="<?= BASE_URL ?>/role">Role User</a></li>
                 </ul>
@@ -24,6 +23,18 @@
                 </ul>
             </li>
             <li class="nav-item"><a href="<?= BASE_URL ?>/transaksi" class="nav-link">Transaksi</a></li>
+            <?php
+            if (isset($_SESSION['nama'])): ?>
+            <li class="nav-item"><a href="<?= BASE_URL ?>/auth/logout" class="nav-link">Logout</a></li>
+            <?php endif; ?>
+            <?php if (isset($_SESSION['nama'])): ?>
+            <li class="nav-item">
+                <a href="#" class="nav-link active" aria-current="page">
+                        <?php echo $_SESSION['nama'] ?>
+                </a>
+            </li>
+            <?php endif; ?>
+
         </ul>
     </header>
 </div>

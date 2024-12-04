@@ -1,5 +1,11 @@
 <?php
 
+require_once __DIR__ . '/../MyHelper/Helper.php';
+require_once __DIR__ . '/../core/Database.php';
+
+use App\MyHelper\Helper;
+use app\core\Database;
+
 class UserModel
 {
 
@@ -11,9 +17,45 @@ class UserModel
         $this->db = new Database;
     }
 
+    public function isEmailExist($email)
+    {
+        $sql = "SELECT * FROM $this->table WHERE email = :email";
+
+        try {
+            $this->db->query($sql);
+            $this->db->bind(':email', $email);
+            $this->db->execute();
+            $result = $this->db->resultSet();
+            return !empty($result);
+        } catch (\PDOException $e) {
+            return false;
+        }
+    }
+
+    public function isNomorTelpExist($nomor_telp)
+    {
+        $sql = "SELECT * FROM $this->table WHERE nomor_telp = :nomor_telp";
+
+        try {
+            $this->db->query($sql);
+            $this->db->bind(':nomor_telp', $nomor_telp);
+            $this->db->execute();
+            $result = $this->db->resultSet();
+            return !empty($result);
+        } catch (\PDOException $e) {
+            return false;
+        }
+    }
+
+
     public function getUser()
     {
-        $this->db->query("SELECT $this->table.*, role.nama as role_nama FROM $this->table INNER JOIN role ON role.id = $this->table.role_id");
+        $paginasi = Helper::pagination();
+        $limit = $paginasi[0];
+        $offset = $paginasi[1];
+
+        $this->db->query("SELECT $this->table.*, role.nama as role_nama FROM $this->table LEFT JOIN role ON role.id = $this->table.role_id ORDER BY created_at DESC LIMIT $limit OFFSET $offset");
+        
         return $this->db->resultSet();
     }
 
@@ -67,10 +109,10 @@ class UserModel
             $this->db->bind(':nomor_telp', $data['nomor_telp']);
 
             $this->db->execute();
-            return $this->db->rowCount();
+            return true;
 
         } catch (\PDOException $e) {
-            return 0;
+            return false;
         }
     }
 

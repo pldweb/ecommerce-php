@@ -1,5 +1,10 @@
 <?php
 
+require_once __DIR__ . '/../MyHelper/Helper.php';
+require_once __DIR__ . '/../core/Database.php';
+
+use App\MyHelper\Helper;
+use app\core\Database;
 class RoleModel
 {
 
