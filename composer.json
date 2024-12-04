@@ -1,0 +1,17 @@
+{
+    "name": "baharudinyusuf/ecommerce",
+    "autoload": {
+        "psr-4": {
+            "Baharudinyusuf\\Ecommerce\\": "src/"
+        }
+    },
+    "authors": [
+        {
+            "name": "Muhammad Rivaldi Fanani",
+            "email": "muhammadrivaldifnni01@gmail.com"
+        }
+    ],
+    "require": {
+        "nesbot/carbon": "^3.8"
+    }
+}

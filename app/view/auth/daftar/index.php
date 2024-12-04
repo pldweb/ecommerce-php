@@ -31,7 +31,7 @@
                 <input type="number" name="nomor_telp" class="form-control" required>
             </div>
             <button type="submit" class="btn btn-primary">Daftar Sekarang</button>
-            <a href="<?= BASE_URL ?>/auth/login" class="">Login</a>
+            <a href="<?= BASE_URL ?>/auth/index" class="">Login</a>
         </form>
     </div>
 

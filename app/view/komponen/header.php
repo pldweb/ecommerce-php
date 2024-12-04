@@ -25,7 +25,7 @@
             <li class="nav-item"><a href="<?= BASE_URL ?>/transaksi" class="nav-link">Transaksi</a></li>
             <?php
             if (isset($_SESSION['nama'])): ?>
-            <li class="nav-item"><a href="<?= BASE_URL ?>/login/logout" class="nav-link">Logout</a></li>
+            <li class="nav-item"><a href="<?= BASE_URL ?>/auth/logout" class="nav-link">Logout</a></li>
             <?php endif; ?>
             <?php if (isset($_SESSION['nama'])): ?>
             <li class="nav-item">

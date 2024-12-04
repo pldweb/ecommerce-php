@@ -1,29 +1,22 @@
 <?php
-//
-//require_once __DIR__ . "/../Carbon/Carbon.php";
-//require_once __DIR__ . "/../symfony/ClockInterface.php";
-//require_once __DIR__ . "/../symfony/Clock.php";
-//
-//use Carbon\Carbon;
-//use Symfony\Component\Clock\Clock;
-//use Psr\Clock\ClockInterface;
+
+require_once __DIR__ . '/../../vendor/autoload.php';
+require_once __DIR__ . '/../models/UserModel.php';
+
+use Carbon\Carbon;
 
 class User extends Controller
 {
+
     public function index()
     {
         $data['judul'] = 'Data User';
-        $data['halaman'] = substr($data['judul'], 5);
+        $data['halaman'] = 'User';
         $data['user'] = $this->model('UserModel')->getUser();
 
-        foreach ($data['user'] as $user) {
-            if (isset($user['created_at'])) {
-                $user['created_at'] = Carbon::parse($user['created_at'])->timezone(TIMEZONE)->format('l, j F Y');
-            } else {
-                $user['created_at'] = '-';
-            }
+        foreach ($data['user'] as $key => $user) {
+            $data['user'][$key]['created_at'] = Carbon::parse($user['created_at'])->locale('id')->translatedFormat('l, j F Y');
         }
-        unset($user);
 
         $this->render('komponen/script-top');
         $this->render('komponen/header');
@@ -59,28 +52,85 @@ class User extends Controller
 
     public function simpan($id = null)
     {
+        if (empty($_POST)) {
+            Flasher::setflash('Gagal', 'terjadi kesalahan', 'danger');
+            header('location:' . BASE_URL . '/user/tambah');
+            exit;
+        }
+
+        if (strlen($_POST['nama']) == 0) {
+            Flasher::setflash('Gagal', 'Nama tidak ada', 'danger');
+            header('location:' . BASE_URL . '/user/tambah');
+            exit;
+        }
+
+        if (empty($_POST['email'])) {
+            Flasher::setflash('Gagal', 'Email tidak ada', 'danger');
+            header('location:' . BASE_URL . '/user/tambah');
+            exit;
+        }
+
+        if (!filter_var($_POST['email'], FILTER_VALIDATE_EMAIL)) {
+            Flasher::setflash('Gagal', 'Format email tidak valid', 'danger');
+            header('location:' . BASE_URL . '/user/tambah');
+            exit;
+        }
+
+        $userModel = new UserModel;
+        if ($userModel->isEmailExist($_POST['email'])) {
+            Flasher::setflash('Gagal', 'Email sudah ada', 'danger');
+            header('location:' . BASE_URL . '/user/tambah');
+            exit;
+        }
+
+        if (strlen($_POST['password']) == 0) {
+            Flasher::setflash('Gagal', 'Password tidak ada', 'danger');
+            header('location:' . BASE_URL . '/user/tambah');
+            exit;
+        }
+
+        if (strlen($_POST['password']) == 0) {
+            Flasher::setflash('Gagal', 'Nama tidak ada', 'danger');
+            header('location:' . BASE_URL . '/user/tambah');
+            exit;
+        }
+        $_POST['password'] = password_hash($_POST['password'], PASSWORD_DEFAULT);
+
+        if (strlen($_POST['nomor_telp']) == 0) {
+            Flasher::setflash('Gagal', 'Nomor telepon tidak ada', 'danger');
+            header('location:' . BASE_URL . '/user/tambah');
+            exit;
+        }
+
+        if (strlen($_POST['nomor_telp']) < 10 || strlen($_POST['nomor_telp']) > 13) {
+            Flasher::setflash('Gagal', 'Digit nomor telepon tidak sesuai', 'danger');
+            header('location:' . BASE_URL . '/user/tambah');
+            exit;
+        }
+
+        if ($userModel->isNomorTelpExist($_POST['nomor_telp'])) {
+            Flasher::setflash('Gagal', 'Nomor telepon sudah ada', 'danger');
+            header('location:' . BASE_URL . '/user/tambah');
+            exit;
+        }
+
         if ($id) {
-            if ($this->model('UserModel')->updateDataUser($_POST, $id) == true) {
+            // Update data user
+            if ($this->model('UserModel')->updateDataUser($_POST, $id)) {
                 Flasher::setFlash('Berhasil', 'Data berhasil diedit', 'success');
-                header('location:' . BASE_URL . '/user');
-                exit;
             } else {
                 Flasher::setFlash('Kesalahan', 'Data gagal disimpan', 'danger');
-                header('location:' . BASE_URL . '/user');
-                exit;
             }
         } else {
-            if ($this->model('UserModel')->simpanDataUser($_POST) > 0) {
+            // Simpan data user baru
+            if ($this->model('UserModel')->simpanDataUser($_POST) == true) {
                 Flasher::setFlash('Berhasil', 'Data berhasil ditambahkan', 'success');
-                header('location:' . BASE_URL . '/user');
-                exit;
             } else {
                 Flasher::setFlash('Kesalahan', 'Data gagal disimpan', 'danger');
-                header('location:' . BASE_URL . '/user');
-                exit;
             }
         }
-    }
+        header('location:' . BASE_URL . '/user');
+     }
 
 
     public function detail($id)

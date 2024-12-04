@@ -1,8 +1,10 @@
 <?php
 
 require_once __DIR__ . '/../MyHelper/Helper.php';
+require_once __DIR__ . '/../core/Database.php';
 
 use App\MyHelper\Helper;
+use app\core\Database;
 
 class UserModel
 {
@@ -14,6 +16,37 @@ class UserModel
     {
         $this->db = new Database;
     }
+
+    public function isEmailExist($email)
+    {
+        $sql = "SELECT * FROM $this->table WHERE email = :email";
+
+        try {
+            $this->db->query($sql);
+            $this->db->bind(':email', $email);
+            $this->db->execute();
+            $result = $this->db->resultSet();
+            return !empty($result);
+        } catch (\PDOException $e) {
+            return false;
+        }
+    }
+
+    public function isNomorTelpExist($nomor_telp)
+    {
+        $sql = "SELECT * FROM $this->table WHERE nomor_telp = :nomor_telp";
+
+        try {
+            $this->db->query($sql);
+            $this->db->bind(':nomor_telp', $nomor_telp);
+            $this->db->execute();
+            $result = $this->db->resultSet();
+            return !empty($result);
+        } catch (\PDOException $e) {
+            return false;
+        }
+    }
+
 
     public function getUser()
     {
