@@ -9,6 +9,7 @@ class User extends Controller
         $data['halaman'] = substr($data['judul'], 5);
         $data['user'] = $this->model('UserModel')->getUser();
 
+
         $this->render('komponen/script-top');
         $this->render('komponen/header');
         $this->render('user/index', $data);

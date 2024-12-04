@@ -67,10 +67,10 @@ class UserModel
             $this->db->bind(':nomor_telp', $data['nomor_telp']);
 
             $this->db->execute();
-            return $this->db->rowCount();
+            return true;
 
         } catch (\PDOException $e) {
-            return 0;
+            return false;
         }
     }
 

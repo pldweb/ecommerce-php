@@ -34,7 +34,6 @@ class App
             }
         }
 
-
         // Parameter
         if (!empty($url)) {
             $this->params = array_values($url);

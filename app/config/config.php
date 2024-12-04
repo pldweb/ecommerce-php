@@ -1,6 +1,5 @@
 <?php
 
-
 define('BASE_URL', 'http://ecommerce.it');
 define('SCRIPT_PATH', BASE_URL . '/app/assets');
 

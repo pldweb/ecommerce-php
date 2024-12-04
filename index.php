@@ -1,8 +1,9 @@
 <?php
 
-if (isset($_SESSION['nama'])) {
+if (session_status() === PHP_SESSION_NONE) {
     session_start();
 }
+
 require_once "./app/init.php";
 
 $app = new App();
