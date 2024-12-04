@@ -1,5 +1,9 @@
 <?php
 
+require_once __DIR__ . '/../MyHelper/Helper.php';
+
+use App\MyHelper\Helper;
+
 class UserModel
 {
 
@@ -13,7 +17,12 @@ class UserModel
 
     public function getUser()
     {
-        $this->db->query("SELECT $this->table.*, role.nama as role_nama FROM $this->table INNER JOIN role ON role.id = $this->table.role_id");
+        $paginasi = Helper::pagination();
+        $limit = $paginasi[0];
+        $offset = $paginasi[1];
+
+        $this->db->query("SELECT $this->table.*, role.nama as role_nama FROM $this->table LEFT JOIN role ON role.id = $this->table.role_id ORDER BY created_at DESC LIMIT $limit OFFSET $offset");
+        
         return $this->db->resultSet();
     }
 

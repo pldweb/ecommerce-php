@@ -10,6 +10,7 @@
             <th scope="col">Email</th>
             <th scope="col">Alamat</th>
             <th scope="col">Nomor Telp</th>
+            <th scope="col">Waktu Registrasi</th>
             <th scope="col">Role</th>
             <th scope="col">Opsi</th>
         </tr>
@@ -22,6 +23,7 @@
             <td><?= $data['email']; ?></td>
             <td><?= $data['alamat']; ?></td>
             <td><?= $data['nomor_telp']; ?></td>
+            <td><?= $data['created_at']; ?></td>
             <td><?= $data['role_nama']; ?></td>
             <td class="">
                 <a href="<?= BASE_URL ?>/user/detail/<?= $data['id'] ?>" class="btn btn-warning">Edit</a>

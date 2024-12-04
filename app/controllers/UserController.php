@@ -1,5 +1,12 @@
 <?php
-
+//
+//require_once __DIR__ . "/../Carbon/Carbon.php";
+//require_once __DIR__ . "/../symfony/ClockInterface.php";
+//require_once __DIR__ . "/../symfony/Clock.php";
+//
+//use Carbon\Carbon;
+//use Symfony\Component\Clock\Clock;
+//use Psr\Clock\ClockInterface;
 
 class User extends Controller
 {
@@ -9,6 +16,14 @@ class User extends Controller
         $data['halaman'] = substr($data['judul'], 5);
         $data['user'] = $this->model('UserModel')->getUser();
 
+        foreach ($data['user'] as $user) {
+            if (isset($user['created_at'])) {
+                $user['created_at'] = Carbon::parse($user['created_at'])->timezone(TIMEZONE)->format('l, j F Y');
+            } else {
+                $user['created_at'] = '-';
+            }
+        }
+        unset($user);
 
         $this->render('komponen/script-top');
         $this->render('komponen/header');
