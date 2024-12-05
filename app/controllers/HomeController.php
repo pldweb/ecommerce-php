@@ -4,7 +4,7 @@
 class Home extends Controller {
     public function index()
     {
-        $data['nama'] = $this->model('UserModel')->getUser();
+//        $data['nama'] = $this->model('UserModel')->getUser();
 
         $data['title'] = 'Login';
         $this->render('komponen/header');

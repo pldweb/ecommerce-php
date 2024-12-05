@@ -14,6 +14,8 @@
     "require": {
         "nesbot/carbon": "^3.8",
       "ext-ctype": "*",
-      "ext-pdo": "*"
+      "ext-pdo": "*",
+        "egulias/email-validator": "^4.0",
+        "nojacko/email-validator": "~1.0"
     }
 }
