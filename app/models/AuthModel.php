@@ -1,6 +1,5 @@
 <?php
 
-
 use app\core\Database;
 
 class AuthModel

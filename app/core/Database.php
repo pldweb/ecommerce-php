@@ -12,7 +12,7 @@ class Database
     private $pass = DB_PASS;
     private $db_name = DB_NAME;
 
-    private $dbh; // Database Handler
+    public $dbh; // Database Handler
     private $stmt;
 
     public function __construct()
