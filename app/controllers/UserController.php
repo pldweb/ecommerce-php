@@ -3,6 +3,8 @@
 require_once __DIR__ . '/../../vendor/autoload.php';
 require_once __DIR__ . '/../models/UserModel.php';
 
+use App\Models\UserModel;
+
 use Carbon\Carbon;
 
 class User extends Controller
@@ -27,7 +29,7 @@ class User extends Controller
     public function tambah()
     {
         $data['judul'] = 'Tambah Data User';
-        $data['role'] = $this->model('UserModel')->getRole();
+        $data['role'] = UserModel->getRole();
 
         $this->render('komponen/script-top');
         $this->render('komponen/header');
@@ -77,7 +79,7 @@ class User extends Controller
         }
 
         if (!$id){
-            $userModel = new UserModel;
+            $userModel = new UserModel();
             if ($userModel->isEmailExist($_POST['email'])) {
                 Flasher::setflash('Gagal', 'Email sudah ada', 'danger');
                 header('location:' . BASE_URL . '/user/tambah');

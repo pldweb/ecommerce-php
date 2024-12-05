@@ -1,5 +1,7 @@
 <?php
 
+namespace App\Models;
+
 require_once __DIR__ . '/../MyHelper/Helper.php';
 require_once __DIR__ . '/../core/Database.php';
 
@@ -28,7 +30,7 @@ class UserModel
             $result = $this->db->resultSet();
             return !empty($result);
         } catch (\PDOException $e) {
-            return false;
+            return "Error: " . $e->getMessage();
         }
     }
 
@@ -43,7 +45,7 @@ class UserModel
             $result = $this->db->resultSet();
             return !empty($result);
         } catch (\PDOException $e) {
-            return false;
+            return "Error: " . $e->getMessage();
         }
     }
 
@@ -120,11 +122,5 @@ class UserModel
     {
         $this->db->query("SELECT * FROM $this->table WHERE id = '$id'");
         return $this->db->single();
-    }
-
-    public function getRole()
-    {
-        $this->db->query("SELECT * FROM role");
-        return $this->db->resultSet();
     }
 }

@@ -1,5 +1,7 @@
 <?php
 
+namespace App\Models;
+
 require_once __DIR__ . '/../MyHelper/Helper.php';
 require_once __DIR__ . '/../core/Database.php';
 

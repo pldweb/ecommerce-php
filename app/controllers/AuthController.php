@@ -1,7 +1,9 @@
 <?php
 
+require_once __DIR__ . '/../models/UserModel.php';
 
 use App\Core\Database;
+use App\Models\UserModel;
 
 class Auth extends Controller
 {
@@ -79,6 +81,13 @@ class Auth extends Controller
             exit;
         }
 
+        $userModel = new UserModel();
+        if ($userModel->isEmailExist($email)) {
+            Flasher::setflash('Gagal', 'Email sudah terdaftar', 'danger');
+            header('location:' . BASE_URL . '/auth/daftar');
+            exit;
+        }
+
         $password = $_POST['password'];
         if (strlen(strval($password)) == 0) {
             Flasher::setflash('Gagal', 'password tidak ada', 'danger');
@@ -92,6 +101,13 @@ class Auth extends Controller
             header('location:' . BASE_URL . '/auth/daftar');
             exit;
         }
+
+        if ($userModel->isNomorTelpExist($nomor_telp)) {
+            Flasher::setflash('Gagal', 'no telp sudah terdaftar', 'danger');
+            header('location:' . BASE_URL . '/auth/daftar');
+            exit;
+        }
+
 
         $db = new Database();
         $db->dbh->beginTransaction();
@@ -109,7 +125,7 @@ class Auth extends Controller
             $db->execute();
             $db->dbh->commit();
 
-            Flasher::setflash('Berhasil', 'Anda berhasil login', 'success');
+            Flasher::setflash('Berhasil', 'Anda berhasil daftar', 'success');
             header('location:' . BASE_URL . '/login');
             exit;
 

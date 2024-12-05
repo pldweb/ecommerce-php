@@ -1,5 +1,7 @@
 <?php
 
+namespace App\Models;
+
 use app\core\Database;
 
 class AuthModel
@@ -34,7 +36,6 @@ class AuthModel
             $this->db->bind(":nomor_telp", $data['nomor_telp']);
             $this->db->execute();
             return true;
-
         } catch (\PDOException $e) {
             return false;
         }
