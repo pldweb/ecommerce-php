@@ -76,11 +76,13 @@ class User extends Controller
             exit;
         }
 
-        $userModel = new UserModel;
-        if ($userModel->isEmailExist($_POST['email'])) {
-            Flasher::setflash('Gagal', 'Email sudah ada', 'danger');
-            header('location:' . BASE_URL . '/user/tambah');
-            exit;
+        if (!$id){
+            $userModel = new UserModel;
+            if ($userModel->isEmailExist($_POST['email'])) {
+                Flasher::setflash('Gagal', 'Email sudah ada', 'danger');
+                header('location:' . BASE_URL . '/user/tambah');
+                exit;
+            }
         }
 
         if (strlen($_POST['password']) == 0) {
@@ -94,7 +96,7 @@ class User extends Controller
             header('location:' . BASE_URL . '/user/tambah');
             exit;
         }
-        $_POST['password'] = password_hash($_POST['password'], PASSWORD_DEFAULT);
+//        $_POST['password'] = password_hash($_POST['password'], PASSWORD_DEFAULT);
 
         if (strlen($_POST['nomor_telp']) == 0) {
             Flasher::setflash('Gagal', 'Nomor telepon tidak ada', 'danger');
@@ -108,10 +110,12 @@ class User extends Controller
             exit;
         }
 
-        if ($userModel->isNomorTelpExist($_POST['nomor_telp'])) {
-            Flasher::setflash('Gagal', 'Nomor telepon sudah ada', 'danger');
-            header('location:' . BASE_URL . '/user/tambah');
-            exit;
+        if (!$id){
+            if ($userModel->isNomorTelpExist($_POST['nomor_telp'])) {
+                Flasher::setflash('Gagal', 'Nomor telepon sudah ada', 'danger');
+                header('location:' . BASE_URL . '/user/tambah');
+                exit;
+            }
         }
 
         if ($id) {

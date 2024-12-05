@@ -11,4 +11,9 @@ class Helper
         $offset = ($nomor_halaman - 1) * $limit;
         return [$limit, $offset];
     }
+
+    function assets($path)
+    {
+        return BASE_URL . '/app/assets/' . ltrim($path, '/');
+    }
 }

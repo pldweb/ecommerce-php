@@ -58,7 +58,6 @@ class App
                 }
                 $url[0] = implode($url[0]);
             }
-
             return $url;
         } else {
             return [$this->controller, $this->method];

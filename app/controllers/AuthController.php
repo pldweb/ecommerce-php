@@ -1,6 +1,5 @@
 <?php
 
-
 class Auth extends Controller
 {
     public function index()
@@ -14,6 +13,7 @@ class Auth extends Controller
         $password = $_POST['password'];
 
         $data['login'] = $this->model('AuthModel')->getData($email, $password);
+        var_dump($data['login']);
         if ($data['login'] == NULL) {
             header("location:" . BASE_URL . "/login");
         } else {
@@ -40,17 +40,20 @@ class Auth extends Controller
         if (strlen($_POST['email']) == 0) {
             Flasher::setflash('Gagal', 'email tidak ada', 'danger');
             header('location:' . BASE_URL . '/auth/daftar');
+            exit;
         }
 
-        $password = password_hash($_POST['password'], PASSWORD_DEFAULT);
-        if (strlen($password) == 0) {
+        if (strlen($_POST['password']) == 0) {
             Flasher::setflash('Gagal', 'password tidak ada', 'danger');
             header('location:' . BASE_URL . '/auth/daftar');
+            exit;
         }
+//        $_POST['password'] = password_hash($_POST['password'], PASSWORD_DEFAULT);
 
         if (strlen($_POST['nomor_telp']) == 0) {
             Flasher::setflash('Gagal', 'no telp tidak ada', 'danger');
             header('location:' . BASE_URL . '/auth/daftar');
+            exit;
         }
 
         if ($_POST){
@@ -65,6 +68,7 @@ class Auth extends Controller
            } else {
                Flasher::setFlash('Gagal', 'Data Anda tidak bisa didaftarkan', 'danger');
                header('location:' . BASE_URL . '/auth/daftar');
+               exit;
            }
         }
     }

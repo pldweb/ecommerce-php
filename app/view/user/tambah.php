@@ -22,7 +22,7 @@
         <label for="nomor_telp" class="form-label nomor_telp">Nomor Telp</label>
         <div class="input-group mb-3">
             <span class="input-group-text" id="basic-addon1">+62</span>
-            <input type="number" class="form-control" id="nomor_telp" name="nomor_telp" placeholder="ex:8757834" value="<?= isset($_POST['nomor_telp']) ? $_POST['nomor_telp'] : '' ?>">
+            <input type="text" class="form-control" id="nomor_telp" name="nomor_telp" placeholder="ex:8757834" value="<?= isset($_POST['nomor_telp']) ? $_POST['nomor_telp'] : '' ?>">
         </div>
         <div class="mb-3">
             <label for="role_id" class="form-label password">Role</label>

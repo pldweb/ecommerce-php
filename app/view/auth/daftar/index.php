@@ -28,7 +28,7 @@
             </div>
             <div class="mb-3">
                 <label for="nomor_telp" class="form-label">Nomor Telp</label>
-                <input type="number" name="nomor_telp" class="form-control" required>
+                <input type="text" name="nomor_telp" class="form-control" required>
             </div>
             <button type="submit" class="btn btn-primary">Daftar Sekarang</button>
             <a href="<?= BASE_URL ?>/auth/index" class="">Login</a>

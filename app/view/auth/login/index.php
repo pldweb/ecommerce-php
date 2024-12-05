@@ -1,4 +1,10 @@
-<html>
+<?php
+
+require_once BASE_PATH . '/MyHelper/Helper.php';
+
+?>
+
+<html lang="id">
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -23,7 +29,7 @@
                 <label for="password" class="form-label">Password</label>
                 <input type="password" name="password" class="form-control" required>
             </div>
-            <button type="submit" class="btn btn-primary">Submit</button>
+            <button type="submit" class="btn btn-primary">Login</button>
             <a href="<?= BASE_URL ?>/auth/daftar" class="">Daftar</a>
         </form>
     </div>
