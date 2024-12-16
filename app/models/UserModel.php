@@ -56,8 +56,10 @@ class UserModel
         $limit = $paginasi[0];
         $offset = $paginasi[1];
 
-        $this->db->query("SELECT $this->table.*, role.nama as role_nama FROM $this->table LEFT JOIN role ON role.id = $this->table.role_id ORDER BY created_at DESC LIMIT $limit OFFSET $offset");
-        
+//        $this->db->query("SELECT $this->table.*, role.nama as role_nama FROM $this->table LEFT JOIN role ON role.id = $this->table.role_id ORDER BY created_at DESC LIMIT $limit OFFSET $offset");
+
+        $this->db->query("SELECT $this->table.*, role.nama AS role_nama FROM $this->table LEFT JOIN role ON role.id = $this->table.role_id");
+
         return $this->db->resultSet();
     }
 

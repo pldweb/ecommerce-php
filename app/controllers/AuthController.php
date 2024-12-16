@@ -4,6 +4,8 @@ require_once __DIR__ . '/../models/UserModel.php';
 
 use App\Core\Database;
 use App\Models\UserModel;
+use EmailValidator\Validator;
+
 
 class Auth extends Controller
 {
@@ -76,7 +78,22 @@ class Auth extends Controller
 
         $email = $_POST['email'];
         if (strlen(strval($email)) == 0) {
-            Flasher::setflash('Gagal', 'email tidak ada', 'danger');
+            Flasher::setflash('Gagal', 'Email tidak ada', 'danger');
+            header('location:' . BASE_URL . '/auth/daftar');
+            exit;
+        }
+
+        $regex = "/^[_a-z0-9-]+(\.[_a-z0-9-]+)*@[a-z0-9-]+(\.[a-z0-9-]+)*(\.[a-z]{2,10})$/";
+        $email = strtolower($email);
+        if (!preg_match($regex, $email)) {
+            Flasher::setflash('Gagal', 'Email mengandung karakter yang tidak valid', 'danger');
+            header('location:' . BASE_URL . '/auth/daftar');
+            exit;
+        }
+
+        $validator = new Validator();
+        if (!$validator->isValid($email) || !$validator->isSendable($email)) {
+            Flasher::setflash('Gagal', 'email tidak valid', 'danger');
             header('location:' . BASE_URL . '/auth/daftar');
             exit;
         }
@@ -102,17 +119,22 @@ class Auth extends Controller
             exit;
         }
 
+        if (!preg_match('/^[0-9]{10,13}+$/', $nomor_telp)) {
+            Flasher::setflash('Gagal', 'no telp invalid', 'danger');
+            header('location:' . BASE_URL . '/auth/daftar');
+            exit;
+        }
+
         if ($userModel->isNomorTelpExist($nomor_telp)) {
             Flasher::setflash('Gagal', 'no telp sudah terdaftar', 'danger');
             header('location:' . BASE_URL . '/auth/daftar');
             exit;
         }
 
-
-        $db = new Database();
-        $db->dbh->beginTransaction();
-
         try {
+
+            $db = new Database();
+            $db->dbh->beginTransaction();
 
             $query = "INSERT INTO user (nama, email, password, nomor_telp) 
               VALUES (:nama, :email, :password, :nomor_telp)";
