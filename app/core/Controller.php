@@ -1,5 +1,7 @@
 <?php
 
+use App\MyHelper;
+
 class Controller
 {
     public function render($view, $data = [])

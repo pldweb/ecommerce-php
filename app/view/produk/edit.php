@@ -29,9 +29,9 @@
         <div class="mb-3">
             <label for="role_id" class="form-label password">Role</label>
             <select name="role_id" id="role_id" class="form-select" aria-label="select">
-                <?= foreach ($data['role'] as $item) { ?>
-                    <option value="<?= echo $item['id']?>"><?= echo $item['nama']?></option>
-                <?= } ?>
+                <?php foreach ($data['role'] as $item) { ?>
+                    <option value="<?php echo $item['id']?>"><?php echo $item['nama']?></option>
+                <?php } ?>
             </select>
         </div>
         <button type="submit" class="btn btn-primary" value="simpan">Submit</button>

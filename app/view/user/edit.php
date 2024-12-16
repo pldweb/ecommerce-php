@@ -3,7 +3,7 @@
     <div>
         <h4><?= $data['judul'] ?></h4>
     </div>
-    <form action="<?= BASE_URL ?>/user/simpan/<?= $data['detail']['id'] ?>" method="post">
+    <form action="<?= BASE_URL ?>/user/update/<?= $data['detail']['id'] ?>" method="post">
         <input type="hidden" name="id" value="<?= $data['detail']['id']; ?>">
         <div class="mb-3">
             <label for="nama" class="form-label nama">Nama</label>
@@ -28,9 +28,10 @@
         </div>
         <div class="mb-3">
             <label for="role_id" class="form-label password">Role</label>
-            <select name="role_id" id="role_id" class="form-select" aria-label="select">
+            <select name="role_id" id="role_id" class="form-select" aria-label="select" >
                 <?php foreach ($data['role'] as $item) { ?>
-                    <option value="<?php echo $item['id']?>"><?php echo $item['nama']?></option>
+                    <option value="<?php echo $item['id']?>"
+                        <?php echo $data['detail']['nama_role'] == $item['nama'] ? 'selected' : '' ?>><?php echo $item['nama']?></option>
                 <?php } ?>
             </select>
         </div>

@@ -131,11 +131,10 @@ class Auth extends Controller
             exit;
         }
 
-
-        $db = new Database();
-        $db->dbh->beginTransaction();
-
         try {
+
+            $db = new Database();
+            $db->dbh->beginTransaction();
 
             $query = "INSERT INTO user (nama, email, password, nomor_telp) 
               VALUES (:nama, :email, :password, :nomor_telp)";

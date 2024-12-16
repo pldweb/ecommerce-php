@@ -1,6 +1,9 @@
 {
     "name": "baharudinyusuf/ecommerce",
     "autoload": {
+      "files": [
+        "app/MyHelper/Helper.php"
+      ],
         "psr-4": {
             "Baharudinyusuf\\Ecommerce\\": "src/"
         }

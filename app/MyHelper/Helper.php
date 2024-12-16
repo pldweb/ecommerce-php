@@ -17,3 +17,11 @@ class Helper
         return BASE_URL . '/app/assets/' . ltrim($path, '/');
     }
 }
+
+function dd($data)
+{
+    echo '<pre>';
+    var_dump($data);
+    echo '</pre>';
+    die();
+}
