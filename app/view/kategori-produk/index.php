@@ -12,7 +12,7 @@
         </tr>
         </thead>
         <tbody>
-        <?php foreach ($data['kategori-produk'] as $num => $data){ ?>
+        <?php foreach ($data['kategoriProduk'] as $num => $data){ ?>
         <tr>
             <td><?= $num+1; ?></td>
             <td><?= $data['nama']; ?></td>

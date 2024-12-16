@@ -50,9 +50,10 @@ class User extends Controller
             exit;
         }
 
+        $db = new Database();
+
         try {
 
-            $db = new Database();
             $sql = "DELETE FROM user WHERE id = '$id'";
             $db->query($sql);
             $db->execute();

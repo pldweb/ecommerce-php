@@ -48,16 +48,22 @@ class Role extends Controller
         $db = new Database();
 
         try {
-            $sql = "DELETE FROM role WHERE id = :id";
-            $db->query($sql);
-            $db->bind(':id', $id);
+
+            $data_sql = "SELECT * FROM role WHERE id = '$id'";
+            $db->query($data_sql);
             $db->execute();
+            $data = $db->single();
+
+            $sql = "DELETE FROM role WHERE id = '$id'";
+            $db->query($sql);
+            $db->execute();
+
             Flasher::setflash('Berhasil', 'Anda berhasil hapus data', 'success');
             header('location:' . BASE_URL . '/role');
             exit;
 
         } catch (PDOException $e) {
-            Flasher::setflash('Gagal' . $e->getMessage(), 'Terjadi Kesalahan', 'danger');
+            Flasher::setflash('Gagal hapus role ' . $data['nama'], 'Anda harus menghapus data yang berkaitan dengan data role', 'danger');
             header('location:' . BASE_URL . '/role');
             exit;
         }

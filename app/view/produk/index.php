@@ -16,11 +16,13 @@
         <tbody>
         <?php foreach ($data['produk'] as $num => $data){ ?>
         <tr>
-            <td><?= $no++; ?></td>
+            <td><?= $num+1; ?></td>
             <td><?= $data['nama']; ?></td>
-            <td><?= $data['Harga']; ?></td>
-            <td><?= $data['Deksripsi']; ?></td>
-            <td><?= $data['Foto']; ?></td>
+            <td><?= $data['harga']; ?></td>
+            <td><?= $data['deskripsi']; ?></td>
+            <td>
+                <img style="width: 60px; height: 60px;" src="<?= BASE_URL ?>/app/assets/img/produk/<?= $data['foto'] ?>" class="img-thumbnail" alt="">
+            </td>
             <td class="">
                 <a href="<?= BASE_URL ?>/produk/detail/<?= $data['id'] ?>" class="btn btn-warning">Edit</a>
                 <a onclick="return confirm('Apakah anda yakin?');" href="<?= BASE_URL ?>/produk/delete/<?= $data['id'] ?>" class="btn btn-danger">Hapus</a>

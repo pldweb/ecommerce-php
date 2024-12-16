@@ -11,7 +11,7 @@
         </tr>
         </thead>
         <tbody>
-        <?php foreach ($data['brand-produk'] as $num => $data){ ?>
+        <?php foreach ($data['brandProduk'] as $num => $data){ ?>
         <tr>
             <td><?= $num+1; ?></td>
             <td><?= $data['nama']; ?></td>

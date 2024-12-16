@@ -1,13 +1,20 @@
 <?php
 
+require_once __DIR__ . '/../../vendor/autoload.php';
+require_once __DIR__ . '/../models/KategoriProdukModel.php';
+
+use App\Core\Database;
+use App\Models\KategoriProdukModel;
 
 class KategoriProduk extends Controller
 {
+
     public function index()
     {
         $data['judul'] = 'Data Kategori Produk';
-        $data['halaman'] = substr($data['judul'], 5);
-        $data['kategori-produk'] = $this->model('KategoriProdukModel')->getKategoriProduk();
+        $data['halaman'] = 'Kategori Produk';
+        $kategoriProdukModel = new KategoriProdukModel();
+        $data['kategoriProduk'] = $kategoriProdukModel->getKategoriProduk();
 
         $this->render('komponen/script-top');
         $this->render('komponen/header');
@@ -17,8 +24,7 @@ class KategoriProduk extends Controller
 
     public function tambah()
     {
-        $data['judul'] = 'Tambah Data KategoriProduk';
-        $data['kategori-produk'] = $this->model('KategoriProdukModel')->getKategoriProduk();
+        $data['judul'] = 'Tambah Data Kategori Produk';
 
         $this->render('komponen/script-top');
         $this->render('komponen/header');
@@ -28,14 +34,31 @@ class KategoriProduk extends Controller
 
     public function delete($id)
     {
-        if ($id){
-            if ($this->model('KategoriProdukModel')->deleteKategoriProduk($id) == true) {
-                Flasher::setFlash('Berhasil', 'Data berhasil dihapus', 'success');
-                header('location:' . BASE_URL . '/kategori-produk');
-                exit;
-            }
-        } else {
-            Flasher::setFlash('Kesalahan tidak ada ID', 'Data gagal dihapus', 'danger');
+        if (!$id) {
+            Flasher::setFlash('Gagal', 'Data gagal dihapus', 'danger');
+            header('location:' . BASE_URL . '/kategori-produk');
+            exit;
+        }
+
+        $db = new Database();
+
+        try {
+
+            $data_sql = "SELECT * FROM kategori_produk WHERE id = '$id'";
+            $db->query($data_sql);
+            $db->execute();
+            $data = $db->single();
+
+            $sql = "DELETE FROM kategori_produk WHERE id = '$id'";
+            $db->query($sql);
+            $db->execute();
+
+            Flasher::setflash('Berhasil', 'Anda berhasil hapus data', 'success');
+            header('location:' . BASE_URL . '/kategori-produk');
+            exit;
+
+        } catch (PDOException $e) {
+            Flasher::setflash('Gagal hapus kategori produk ' . $data['nama'], 'Anda harus menghapus data yang berkaitan dengan data kategoriProduk', 'danger');
             header('location:' . BASE_URL . '/kategori-produk');
             exit;
         }
@@ -43,40 +66,103 @@ class KategoriProduk extends Controller
 
     public function simpan($id = null)
     {
-        if ($id) {
-            if ($this->model('KategoriProdukModel')->updateDataKategoriProduk($_POST, $id) == true) {
-                Flasher::setFlash('Berhasil', 'Data berhasil diedit', 'success');
-                header('location:' . BASE_URL . '/kategori-produk');
-                exit;
-            } else {
-                Flasher::setFlash('Kesalahan', 'Data gagal disimpan', 'danger');
-                header('location:' . BASE_URL . '/kategori-produk');
-                exit;
-            }
-        } else {
-            if ($this->model('KategoriProdukModel')->simpanDataKategoriProduk($_POST) > 0) {
-                Flasher::setFlash('Berhasil', 'Data berhasil ditambahkan', 'success');
-                header('location:' . BASE_URL . '/kategori-produk');
-                exit;
-            } else {
-                Flasher::setFlash('Kesalahan', 'Data gagal disimpan', 'danger');
-                header('location:' . BASE_URL . '/kategori-produk');
-                exit;
-            }
+        $nama = $_POST['nama'];
+        if (strlen(strval($nama)) == 0) {
+            Flasher::setflash('Gagal', 'nama tidak ada', 'danger');
+            header('location:' . BASE_URL . '/auth/daftar');
+            exit;
         }
+
+        $db = new Database();
+
+        try {
+
+            $db->dbh->beginTransaction();
+            $query = "INSERT INTO kategori_produk (nama) VALUES (:nama)";
+
+            $db->query($query);
+            $db->bind('nama', $nama);
+            $db->execute();
+            $db->dbh->commit();
+
+            Flasher::setflash('Berhasil', 'Anda berhasil menambah kategori produk baru', 'success');
+            header('location:' . BASE_URL . '/kategori-produk');
+            exit;
+
+        } catch (PDOException $e) {
+            $db->dbh->rollback();
+            Flasher::setflash('Gagal' . $e->getMessage(), 'Terjadi Kesalahan', 'danger');
+            header('location:' . BASE_URL . '/kategori-produk');
+            exit;
+        }
+
     }
+
 
     public function detail($id)
     {
-        $data['judul'] = 'Edit Data KategoriProduk';
+        $data['judul'] = 'Edit Data Kategori Produk';
         $data['halaman'] = substr($data['judul'], 10);
-        $data['detail'] = $this->model('KategoriProdukModel')->getKategoriProdukById($id);
-        $data['kategori-produk'] = $this->model('KategoriProdukModel')->getKategoriProduk();
+
+        if (!$id) {
+            Flasher::setflash('Gagal', 'Terjadi Kesalahan', 'danger');
+            header('location:' . BASE_URL . '/kategori-produk');
+            exit;
+        }
+
+        $db = new Database();
+        $sql = "SELECT * FROM kategori_produk WHERE id = '$id'";
+        $db->query($sql);
+        $db->execute();
+        $data['detail'] = $db->single();
+
+        $kategoriProdukModel = new KategoriProdukModel();
+        $data['kategoriProduk'] = $kategoriProdukModel->getKategoriProduk();
 
         $this->render('komponen/script-top');
         $this->render('komponen/header');
         $this->render('kategori-produk/edit', $data);
         $this->render('komponen/script-bottom');
+    }
+
+    public function update($id)
+    {
+        $sqlCheck = "SELECT * FROM kategori_produk WHERE id=:id";
+        $db = new Database();
+        $db->query($sqlCheck);
+        $db->bind('id', $id);
+        $db->execute();
+        $checkId = $db->single();
+
+
+        if ($checkId['id'] != $id) {
+            Flasher::setflash('Gagal ID Kategori Produk tidak ditemukan', 'Terjadi Kesalahan', 'danger');
+            header('location:' . BASE_URL . '/kategori-produk/detail/' . $id);
+            exit;
+        }
+
+        $nama = $_POST['nama'];
+
+        try {
+            $db->dbh->beginTransaction();
+            $sql = "UPDATE kategori_produk SET nama=:nama WHERE id=:id";
+            $db->query($sql);
+            $db->bind('id', $id);
+            $db->bind('nama', $nama);
+
+            $db->execute();
+            $db->dbh->commit();
+
+            Flasher::setflash('Berhasil', 'Anda berhasil edit kategori produk', 'success');
+            header('location:' . BASE_URL . '/kategori-produk');
+            exit;
+
+        } catch (PDOException $e) {
+            $db->dbh->rollback();
+            Flasher::setflash('Gagal'. $e->getMessage(), 'Terjadi Kesalahan', 'danger');
+            header('location:' . BASE_URL . '/kategori-produk/detail/' . $id);
+            exit;
+        }
     }
 
 }
