@@ -3,7 +3,7 @@
     <div>
         <h4><?= $data['judul'] ?></h4>
     </div>
-    <form action="<?= BASE_URL ?>/brand-produk/simpan/<?= $data['detail']['id'] ?>" method="post">
+    <form action="<?= BASE_URL ?>/brand-produk/update/<?= $data['detail']['id'] ?>" method="post">
         <input type="hidden" name="id" value="<?= $data['detail']['id']; ?>">
         <div class="mb-3">
             <label for="nama" class="form-label nama">Nama</label>

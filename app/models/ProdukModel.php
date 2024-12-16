@@ -1,5 +1,7 @@
 <?php
 
+namespace App\Models;
+
 require_once __DIR__ . '/../MyHelper/Helper.php';
 require_once __DIR__ . '/../core/Database.php';
 
@@ -19,7 +21,7 @@ class ProdukModel
 
     public function getProduk()
     {
-        $this->db->query("SELECT $this->table.*, brand_produk.nama, kategori_produk.nama FROM $this->table JOIN brand_produk ON brand_produk.id = produk.brand_id JOIN kategori_produk ON kategori_produk.id = produk.kategori_id");
+        $this->db->query("SELECT $this->table.*, brand_produk.nama as nama_brand, kategori_produk.nama as nama_kategori FROM $this->table LEFT JOIN brand_produk ON brand_produk.id = produk.brand_id LEFT JOIN kategori_produk ON kategori_produk.id = produk.kategori_id");
         return $this->db->resultSet();
     }
 

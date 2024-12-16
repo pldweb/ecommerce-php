@@ -8,7 +8,7 @@
             <input type="text" class="form-control" id="nama" name="nama" placeholder="nama">
         </div>
         <div class="mb-3">
-            <label for="brand_id" class="form-label">Kategori Brand</label>
+            <label for="brand_id" class="form-label">Kategori Produk</label>
             <select name="brand_id" id="brand_id" class="form-select" aria-label="select">
                 <?php foreach ($data['brand'] as $item) { ?>
                     <option value="<?php echo $item['id']?>"><?php echo $item['nama']?></option>
@@ -16,8 +16,8 @@
             </select>
         </div>
         <div class="mb-3">
-            <label for="brand_id" class="form-label">Kategori Brand</label>
-            <select name="brand_id" id="brand_id" class="form-select" aria-label="select">
+            <label for="kategori_id" class="form-label">Kategori Brand</label>
+            <select name="kategori_id" id="kategori_id" class="form-select" aria-label="select">
                 <?php foreach ($data['kategori'] as $item) { ?>
                     <option value="<?php echo $item['id']?>"><?php echo $item['nama']?></option>
                 <?php } ?>
@@ -28,8 +28,8 @@
             <input type="number" class="form-control" id="harga" name="harga" placeholder="80.000.000">
         </div>
         <div class="mb-3">
-            <label for="diskon" class="form-label diskon">Diskon Produk</label>
-            <input type="number" class="form-control" id="diskon" name="diskon" placeholder="50%">
+            <label for="stok" class="form-label diskon">Stok Barang</label>
+            <input type="number" class="form-control" id="stok" name="stok" placeholder="">
         </div>
         <label for="deskripsi" class="form-label deskripsi">Deskripsi</label>
         <div class="mb-3">
@@ -37,7 +37,7 @@
         </div>
         <div class="mb-3">
             <label for="foto" class="form-label foto">Foto Produk</label>
-            <input type="file" class="form-control" id="foto" name="foto">
+            <input type="file" name="foto" class="form-control" id="foto">
         </div>
         <button type="submit" onclick="return confirm('Apakah Kamu yakin?');" class="btn btn-primary">Simpan</button>
     </form>
