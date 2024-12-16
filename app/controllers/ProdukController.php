@@ -107,23 +107,20 @@ class Produk extends Controller
             exit;
         }
 
-        $foto = $_FILES['foto'];
-        if ($foto['error'] !== UPLOAD_ERR_OK) {
-            Flasher::setflash('Gagal', 'Gagal mengunggah file', 'danger');
-            header('location:' . BASE_URL . '/produk/tambah');
-            exit;
-        }
+        if ($_FILES['foto']['name']) {
+            $foto = $_FILES['foto'];
+            if ($foto['error'] !== UPLOAD_ERR_OK) {
+                Flasher::setflash('Gagal', 'Gagal mengunggah file', 'danger');
+                header('location:' . BASE_URL . '/produk/tambah');
+                exit;
+            }
 
-        if ($foto['type'] !== "image/png" && $foto['type'] !== "image/jpeg") {
-            Flasher::setflash('Gagal', 'Tipe file tidak didukung, hanya PNG dan JPEG', 'danger');
-            header('location:' . BASE_URL . '/produk/tambah');
-            exit;
+            if ($foto['type'] !== "image/png" && $foto['type'] !== "image/jpeg") {
+                Flasher::setflash('Gagal', 'Tipe file tidak didukung, hanya PNG dan JPEG', 'danger');
+                header('location:' . BASE_URL . '/produk/tambah');
+                exit;
+            }
         }
-
-        $namaFoto = implode("-", explode(" ", basename($foto['name'])));
-        $saveNamaFoto = uniqid() . '_' . $namaFoto;
-        $tmpFile = $foto['tmp_name'];
-        $folderSimpan = __DIR__ . '/../assets/img/produk/' . $saveNamaFoto;
 
         $db = new Database();
 
@@ -141,7 +138,17 @@ class Produk extends Controller
             $db->bind(':diskon', $_POST['diskon']);
             $db->bind(':stok', $_POST['stok']);
             $db->bind(':deskripsi', $_POST['deskripsi']);
-            $db->bind(':foto', $saveNamaFoto);
+            if (!empty($_FILES['foto']['name'])){
+                $foto = $_FILES['foto'];
+                $namaFoto = implode("-", explode(" ", basename($foto['name'])));
+                $saveNamaFoto = uniqid() . '_' . $namaFoto;
+                $tmpFile = $foto['tmp_name'];
+                $folderSimpan = __DIR__ . '/../assets/img/produk/' . $saveNamaFoto;
+
+                $db->bind(':foto', $saveNamaFoto);
+            } else {
+                $db->bind(':foto', '');
+            }
             $result = $db->execute();
 
             if ($result !== false) {
@@ -253,30 +260,27 @@ class Produk extends Controller
             $db->bind('stok', $_POST['stok']);
             $db->bind('deskripsi', $deskripsi);
 
-            $foto = $_FILES['foto'];
-            $namaFoto = implode("-", explode(" ", basename($foto['name'])));
-            $saveNamaFoto = uniqid() . '_' . $namaFoto;
-            $tmpFile = $foto['tmp_name'];
-            $folderSimpan = __DIR__ . '/../assets/img/produk/' . $saveNamaFoto;
+            if (!empty($_FILES['foto'])) {
+                $foto = $_FILES['foto'];
+                $namaFoto = implode("-", explode(" ", basename($foto['name'])));
+                $saveNamaFoto = uniqid() . '_' . $namaFoto;
+                $tmpFile = $foto['tmp_name'];
+                $folderSimpan = __DIR__ . '/../assets/img/produk/' . $saveNamaFoto;
 
-
-            if (empty($_FILES['foto'])) {
-                $db->bind('foto', $checkId['foto']);
-            } else {
                 $db->bind('foto', $saveNamaFoto);
+            } else {
+                $db->bind('foto', $checkId['foto']);
             }
 
-            $result = $db->execute();
-            if ($result !== false) {
-
-                if (move_uploaded_file($tmpFile, $folderSimpan)) {
-                    $db->dbh->commit();
-
-                    Flasher::setflash('Berhasil', 'Anda berhasil menambah produk baru', 'success');
-                    header('location:' . BASE_URL . '/produk');
-                    exit;
-                }
+            $db->execute();
+            if (is_uploaded_file($saveNamaFoto)){
+                move_uploaded_file($tmpFile, $folderSimpan);
             }
+            $db->dbh->commit();
+
+            Flasher::setflash('Berhasil', 'Anda berhasil edit produk', 'success');
+            header('location:' . BASE_URL . '/produk');
+            exit;
 
         } catch (PDOException $e) {
             $db->dbh->rollback();

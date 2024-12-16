@@ -28,6 +28,10 @@
             <input type="number" class="form-control" id="harga" name="harga" placeholder="80.000.000">
         </div>
         <div class="mb-3">
+            <label for="diskon" class="form-label diskon">Diskon</label>
+            <input type="number" class="form-control" id="diskon" name="diskon">
+        </div>
+        <div class="mb-3">
             <label for="stok" class="form-label diskon">Stok Barang</label>
             <input type="number" class="form-control" id="stok" name="stok" placeholder="">
         </div>
