@@ -21,9 +21,7 @@ class Produk extends Controller
         $data['halaman'] = 'Produk';
         $produkModel = new ProdukModel();
         $data['produk'] = $produkModel->getProduk();
-
-//        \App\MyHelper\dd($data['produk']);
-
+        
         $this->render('komponen/script-top');
         $this->render('komponen/header');
         $this->render('produk/index', $data);
@@ -170,7 +168,6 @@ class Produk extends Controller
 
     }
 
-
     public function detail($id)
     {
         $data['judul'] = 'Edit Data Produk';
@@ -219,28 +216,28 @@ class Produk extends Controller
         $namaProduk = $_POST['nama'];
         if (strlen(strval($namaProduk)) == 0) {
             Flasher::setflash('Gagal', 'nama produk tidak ada', 'danger');
-            header('location:' . BASE_URL . '/produk/detail' . $id);
+            header('location:' . BASE_URL . '/produk/detail/' . $id);
             exit;
         }
 
         $brand = $_POST['brand_id'];
         if (!is_numeric($brand)) {
             Flasher::setflash('Gagal', 'brand tidak ada', 'danger');
-            header('location:' . BASE_URL . '/produk/detail' . $id);
+            header('location:' . BASE_URL . '/produk/detail/' . $id);
             exit;
         }
 
         $kategori = $_POST['kategori_id'];
         if (!is_numeric($kategori)) {
             Flasher::setflash('Gagal', 'kategori tidak ada', 'danger');
-            header('location:' . BASE_URL . '/produk/detail' . $id);
+            header('location:' . BASE_URL . '/produk/detail/' . $id);
             exit;
         }
 
         $harga = $_POST['harga'];
         if (strlen(strval($harga)) == 0) {
             Flasher::setflash('Gagal', 'Harga tidak ada', 'danger');
-            header('location:' . BASE_URL . '/produk/detail' . $id);
+            header('location:' . BASE_URL . '/produk/detail/' . $id);
             exit;
         }
 
